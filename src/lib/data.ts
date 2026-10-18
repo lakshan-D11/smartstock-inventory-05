@@ -65,8 +65,8 @@ function genSales(): Sale[] {
   const r = seeded(42); const out: Sale[] = []; const now = new Date();
   for (let i = 0; i < 140; i++) {
     const d = new Date(now); d.setDate(d.getDate() - Math.floor(r() * 180));
-    const prod = products[Math.floor(r() * products.length)];
-    out.push({ id: `SO-${String(1000 + i)}`, date: d.toISOString().slice(0, 10), customer: customers[Math.floor(r() * customers.length)], productId: prod.id, qty: 1 + Math.floor(r() * 8), price: prod.price });
+    const prod = products[Math.floor(r() * products.length)]!;
+    out.push({ id: `SO-${String(1000 + i)}`, date: d.toISOString().slice(0, 10), customer: customers[Math.floor(r() * customers.length)]!, productId: prod.id, qty: 1 + Math.floor(r() * 8), price: prod.price });
   }
   return out.sort((a, b) => b.date.localeCompare(a.date));
 }
@@ -75,7 +75,7 @@ function genPurchases(): Purchase[] {
   const r = seeded(7); const out: Purchase[] = []; const now = new Date();
   for (let i = 0; i < 26; i++) {
     const d = new Date(now); d.setDate(d.getDate() - Math.floor(r() * 150));
-    const prod = products[Math.floor(r() * products.length)];
+    const prod = products[Math.floor(r() * products.length)]!;
     out.push({ id: `PO-${String(500 + i)}`, date: d.toISOString().slice(0, 10), supplierId: prod.supplierId, productId: prod.id, qty: 10 + Math.floor(r() * 60), cost: prod.cost, status: i < 4 ? "Pending" : "Received" });
   }
   return out.sort((a, b) => b.date.localeCompare(a.date));
