@@ -75,7 +75,8 @@ export type Field = { name: string; label: string; type?: "text" | "number" | "e
 
 export function FormDialog({ open, onOpenChange, title, fields, initial, onSubmit, submitLabel = "Save" }: {
   open: boolean; onOpenChange: (o: boolean) => void; title: string; fields: Field[];
-  initial: Record<string, string | number>; onSubmit: (v: Record<string, string>) => string | void; submitLabel?: string;
+  initial: Record<string, string | number>; // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSubmit: (v: any) => string | void; submitLabel?: string;
 }) {
   const [vals, setVals] = useState<Record<string, string>>({});
   const [err, setErr] = useState("");
